@@ -1,6 +1,6 @@
 export type MedicationShape = "round" | "capsule" | "oval" | "square";
 export type MedicationColor =
-  | "White"
+  | "white"
   | "yellow"
   | "pink"
   | "blue"
