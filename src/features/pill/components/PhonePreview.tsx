@@ -32,26 +32,27 @@ const PhonePreview = () => {
             Pill Schedule <span className="text-zinc-500">({paitentName})</span>
           </h1>
         </div>
-        {TIME_SLOTS.map(
-          (time) =>
-            schedule?.[time.id]?.length > 0 && (
-              <div key={time.id}>
-                <h2
-                  className={`mt-4 text-xs font-bold wrap-break-word leading-relaxed text-zinc-100`}
-                >
-                  {time.label} {time.icon}
-                </h2>
-                <div className="grid grid-cols-2 gap-2 grid-rows-2">
-                  {schedule?.[time.id]?.map((pill: Pill) => (
-                    <div key={pill.id} className="bg-zinc-800 rounded-lg p-2">
-                      <PillBox pill={pill} />
-                    </div>
-                  ))}
+        <div className="flex-1 ">
+          {TIME_SLOTS.map(
+            (time) =>
+              schedule?.[time.id]?.length > 0 && (
+                <div key={time.id} className="space-y-2 flex-1">
+                  <h2
+                    className={`mt-4 text-xs font-bold wrap-break-word leading-relaxed text-zinc-100`}
+                  >
+                    {time.label} {time.icon}
+                  </h2>
+                  <div className="grid grid-cols-2 gap-2 ">
+                    {schedule?.[time.id]?.map((pill: Pill) => (
+                      <div key={pill.id} className="">
+                        <PillBox pill={pill} timeOfDay={time.id} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ),
-        )}
-
+              ),
+          )}
+        </div>
         <div className="text-center">
           <span className="text-[10px] text-zinc-500 tracking-widest font-semibold uppercase opacity-60">
             PillSnap

@@ -16,6 +16,7 @@ export interface Pill {
   color: MedicationColor;
   instructions: string;
   image?: string;
+  taken?: boolean;
 }
 
 export interface DaySchedule {

@@ -15,6 +15,10 @@ interface PillState {
     timeOfDay: "morning" | "afternoon" | "evening" | "night",
     pillId: string,
   ) => void;
+  togglePillTaken: (
+    timeOfDay: "morning" | "afternoon" | "evening" | "night",
+    pillId: string,
+  ) => void;
 
   generateShareLink: () => string;
   loadScheduleFormUrl: (encodedData: string) => void;
@@ -86,6 +90,20 @@ export const usePillStore = create<PillState>()(
         });
       },
 
+      togglePillTaken: (timeOfDay, pillId) => {
+        set((state) => ({
+          familySchedule: {
+            ...state.familySchedule,
+            schedule: {
+              ...state.familySchedule.schedule,
+              [timeOfDay]: state.familySchedule.schedule[timeOfDay]?.map(
+                (pill) =>
+                  pill.id === pillId ? { ...pill, taken: !pill.taken } : pill,
+              ),
+            },
+          },
+        }));
+      },
       generateShareLink() {
         const { familySchedule } = get();
         const jsonStr = JSON.stringify(familySchedule);
