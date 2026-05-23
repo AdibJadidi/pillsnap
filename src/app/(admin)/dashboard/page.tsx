@@ -4,11 +4,11 @@ import React from "react";
 
 const page = () => {
   return (
-    <main className="flex w-full h-screen bg-blue-950 ">
+    <main className="flex w-full h-screen bg-blue-950 flex-col-reverse md:flex-row overflow-auto ">
       <section className="flex-1">
         <AdminPanel />
       </section>
-      <section className="w-[500px] h-full bg-blue-900 flex justify-center items-center ">
+      <section className="flex-1 p-3 md:w-[500px] md:h-full bg-blue-900 flex justify-center items-center ">
         <PhonePreview />
       </section>
     </main>
