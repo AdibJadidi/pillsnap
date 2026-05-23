@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💊 PillSnap
 
-## Getting Started
+**PillSnap** is a modern, optimized, and purely client-side platform designed to schedule and simulate medication adherence. It allows doctors or health managers to configure personalized pill schedules—complete with visual attributes like colors and physical shapes—and generate live, shareable patient links instantly without requiring a backend database.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Key Features
+
+- **🔄 Real-time Preview:** Any changes made to the patient's name, dosage, or instructions immediately reflect on the interactive `PhonePreview` (iPhone simulator) component.
+- **🔗 Zero-Database Architecture (URL-Based State Sharing):** Compresses and serializes the entire dashboard schedule state into secure `Base64` strings attached to a public URL, decoupling the app from external data storage.
+- **⚡ Optimized Form Performance:** Built using `react-hook-form` along with custom controllers to isolate re-renders and maintain top-tier performance during data entry.
+- **🎨 Skeuomorphic Flat UI:** Beautifully simulates 3D pill variants (round with mid-lines, capsules, ovals, and rotated squares) matching actual pharmaceutical aesthetics using Tailwind CSS gradients and shadows.
+- **🧼 Persistent Client State:** Powered by Zustand paired with the `persist` middleware to seamlessly retain configured schedules across local browser refreshes.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Framework:** Next.js 15 (App Router)
+- **State Management:** Zustand
+- **Form Handling:** React Hook Form
+- **Styling:** Tailwind CSS & Lucide Icons
+- **Animation:** Framer Motion
+- **Language:** TypeScript
+
+---
+
+## 📂 Project Structure
+
+```text
+src/
+├── app/
+│   ├── (admin)/dashboard/     # Main admin dashboard for configuring schedules
+│   └── view/                  # Public, distraction-free patient view mode
+├── components/                # Shared global UI components
+└── features/pill/             # Core medication feature module
+    ├── components/            # PillBox, PillRender, PhonePreview, UserForm
+    ├── store/                 # usePillStore.ts (State orchestration engine)
+    └── types/                 # Domain-specific TypeScript interfaces
+🚀 Getting Started
+Clone the repository:
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Bash
+git clone [https://github.com/AdibJadidi/pillsnap.git](https://github.com/AdibJadidi/pillsnap.git)
+cd pillsnap
+Install dependencies:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Bash
+npm install
+Fire up the local development server:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Bash
+npm run dev
+Open http://localhost:3000/dashboard in your browser to start scheduling.
