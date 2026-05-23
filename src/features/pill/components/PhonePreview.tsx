@@ -8,8 +8,13 @@ import { Pill } from "@/types";
 const PhonePreview = () => {
   const { familySchedule } = usePillStore();
   const { paitentName, schedule } = familySchedule;
-  console.log("schedule", schedule);
 
+  const TIME_SLOTS = [
+    { id: "morning", label: "Morning", icon: "☀️" },
+    { id: "afternoon", label: "Afternoon", icon: "🌤️" },
+    { id: "evening", label: "Evening", icon: "🌅" },
+    { id: "night", label: "Night", icon: "🌙" },
+  ] as const;
   return (
     <div className="w-[320px] h-[640px] flex flex-col bg-zinc-950 border-8 border-zinc-800 relative rounded-[40px] shadow-2xl overflow-hidden">
       <div className="flex  justify-between w-full h-6 bg-zinc-950 rounded-full z-10 px-5 py-3">
@@ -27,69 +32,24 @@ const PhonePreview = () => {
             Pill Schedule <span className="text-zinc-500">({paitentName})</span>
           </h1>
         </div>
-        {schedule?.morning?.length > 0 && (
-          <div>
-            <h2
-              className={`mt-4 text-xs font-bold wrap-break-word leading-relaxed text-zinc-100`}
-            >
-              Morning
-            </h2>
-            <div className="grid grid-cols-2 gap-2 grid-rows-2">
-              {schedule?.morning?.map((pill: Pill) => (
-                <div key={pill.id} className="bg-zinc-800 rounded-lg p-2">
-                  <PillBox pill={pill} />
+        {TIME_SLOTS.map(
+          (time) =>
+            schedule?.[time.id]?.length > 0 && (
+              <div key={time.id}>
+                <h2
+                  className={`mt-4 text-xs font-bold wrap-break-word leading-relaxed text-zinc-100`}
+                >
+                  {time.label} {time.icon}
+                </h2>
+                <div className="grid grid-cols-2 gap-2 grid-rows-2">
+                  {schedule?.[time.id]?.map((pill: Pill) => (
+                    <div key={pill.id} className="bg-zinc-800 rounded-lg p-2">
+                      <PillBox pill={pill} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        )}
-        {schedule?.afternoon?.length > 0 && (
-          <div>
-            <h2
-              className={`mt-4 text-xs font-bold wrap-break-word leading-relaxed text-zinc-100`}
-            >
-              Afternoon
-            </h2>
-            <div className="grid grid-cols-2 gap-2 grid-rows-2">
-              {schedule?.afternoon?.map((pill) => (
-                <div key={pill.id} className="bg-zinc-800 rounded-lg p-2">
-                  <PillBox pill={pill} />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-        {schedule?.evening?.length > 0 && (
-          <div>
-            <h2
-              className={`mt-4 text-xs font-bold wrap-break-word leading-relaxed text-zinc-100`}
-            >
-              Evening
-            </h2>
-            <div className="grid grid-cols-2 gap-2 grid-rows-2">
-              {schedule?.evening?.map((pill) => (
-                <div key={pill.id} className="bg-zinc-800 rounded-lg p-2">
-                  <PillBox pill={pill} />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-        {schedule?.night?.length > 0 && (
-          <div>
-            <h2
-              className={`mt-4 text-xs font-bold wrap-break-word leading-relaxed text-zinc-100`}
-            >
-              Night
-            </h2>
-            <div className="grid grid-cols-2 gap-2 grid-rows-2">
-              {schedule?.night?.map((pill) => (
-                <div key={pill.id} className="bg-zinc-800 rounded-lg p-2">
-                  <PillBox pill={pill} />
-                </div>
-              ))}
-            </div>
-          </div>
+              </div>
+            ),
         )}
 
         <div className="text-center">
